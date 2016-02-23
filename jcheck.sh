@@ -9,12 +9,17 @@ then
 	exit;
 fi
 
-files=(`git ls-files --other --exclude-standard $top`)
+unstaged=(`git diff --name-only`)
+staged=(`git diff --name-only --staged`)
+untracked=(`git ls-files --other --exclude-standard $top`)
+files="${unstaged[*]} ${staged[*]} ${untracked[*]}"
 csRepo="git@github.com:checkstyle/checkstyle.git"
 csHome="$JCHECK_HOME/checkstyle"
 csJar='checkstyle.jar'
 curDir=`PWD`
 result="Aborted."
+
+echo $files
 
 #check whether mvn is installed.
 if ! type mvn > /dev/null; 
