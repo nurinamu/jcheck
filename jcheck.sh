@@ -89,8 +89,9 @@ if [ -f $csJar ]
 then
 	for f in $files
 	do
-		echo "file : $curDir/$f"
-		java -jar checkstyle.jar -c $config_name $curDir/$f
+		echo "file : $f"
+		echo "path : $top/$f"
+		java -jar checkstyle.jar -c $config_name $top/$f
 	done
 	
 	result="Checking is DONE!"
